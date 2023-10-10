@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const mongoose = require("mongoose");
+const User = require("./models/User.js");
+require("dotenv").config();
 
 const app = express();
-
 app.use(express.json());
 app.use(
   cors({
@@ -11,13 +13,18 @@ app.use(
   })
 );
 
+mongoose.connect(process.env.MONGODB_URL);
+
 app.get("/test", (req, res) => {
   res.json({ test: "test" });
 });
-
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
-  res.json({ email, name, password });
+  User.create({
+    name,
+    email,
+    password,
+  });
 });
 
 const PORT = 4000;
