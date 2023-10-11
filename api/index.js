@@ -53,7 +53,7 @@ app.post("/login", async (req, res) => {
           if (err) throw err;
           res
             .cookie("token", token, { domain: "127.0.0.1", path: "/login" })
-            .json("Password OK");
+            .json(userDoc);
         }
       );
     } else {
