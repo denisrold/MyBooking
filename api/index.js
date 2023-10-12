@@ -10,6 +10,7 @@ require("dotenv").config();
 
 const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
+//Pasar a .env
 const jwtSecret = "64asd54ad56as5ds4564as46a5";
 
 app.use(express.json());
