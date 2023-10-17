@@ -30,7 +30,9 @@ export default function PlacesPage(){
             </>
         )
     }
-
+    function addPhotoByLink(){
+        
+    };
 
     const {action} = useParams();
 return(

@@ -5,6 +5,7 @@ const User = require("./models/User.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const download = require("image-downloader");
 
 require("dotenv").config();
 
@@ -83,6 +84,14 @@ app.get("/profile", (req, res) => {
 
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json(true);
+});
+
+app.post("/upload-by-link", async (req, res) => {
+  const { link } = req.body;
+  await download({
+    url: link,
+    dest: __dirname + "/uploads",
+  });
 });
 
 const PORT = 4000;
