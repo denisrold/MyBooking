@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Perks from "../Perks";
+import axios from "axios";
 
 export default function PlacesPage(){
     const [title,setTitle]= useState('');
     const [address,setAddress] = useState('');
     const [addedPhotos, setAddedPhotos]= useState([]);
-    const [photoLink, setPhotoLink]=('');
+    const [photoLink, setPhotoLink]=useState('');
     const [description,setDescription] = useState('');
     const [perks,setPerks] = useState([]);
     const [extraInfo, setExtraInfo] = useState('');
@@ -30,8 +31,10 @@ export default function PlacesPage(){
             </>
         )
     }
-    function addPhotoByLink(){
-        
+    async function addPhotoByLink(e){
+        e.preventDefault();
+        await axios.post('/upload-by-link', {link:photoLink} )
+        setPhotoLink('');
     };
 
     const {action} = useParams();
@@ -56,8 +59,8 @@ return(
                     <input type='text' value={address} onChange={ev=>setAddress(ev.target.value)} placeholder="address"/>
                     {preInput('Photos','More = better.')}
                     <div className="flex gap-2">
-                        <input type='text' value={photoLink} onChange={ev=>setPhotoLink(ev.target.value)} placeholder={'Add using a link ...jpg'}/>
-                        <button className="bg-gray-200 px-4  rounded-2xl">Add&nbsp;photo</button>
+                        <input type='text' value={photoLink} onChange={ev=> setPhotoLink(ev.target.value)} placeholder={'Add using a link ...jpg'}/>
+                        <button onClick={addPhotoByLink} className="bg-gray-200 px-4  rounded-2xl">Add&nbsp;photo</button>
                     </div>
                     <div className="mt-2 gap-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                         <button className=" flex  gap-1 justify-center border bg-transparent rounded-2xl p-8 text-xl text-gray-600">

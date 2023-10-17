@@ -5,7 +5,7 @@ const User = require("./models/User.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const download = require("image-downloader");
+const imageDownload = require("image-downloader");
 
 require("dotenv").config();
 
@@ -88,8 +88,9 @@ app.post("/logout", (req, res) => {
 
 app.post("/upload-by-link", async (req, res) => {
   const { link } = req.body;
+  console.log(link);
   const newName = Date.now() + ".jpg";
-  await download({
+  await imageDownload.image({
     url: link,
     dest: __dirname + "/uploads/" + newName,
   });
