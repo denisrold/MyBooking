@@ -88,10 +88,12 @@ app.post("/logout", (req, res) => {
 
 app.post("/upload-by-link", async (req, res) => {
   const { link } = req.body;
+  const newName = Date.now() + ".jpg";
   await download({
     url: link,
-    dest: __dirname + "/uploads",
+    dest: __dirname + "/uploads/" + newName,
   });
+  res.json(__dirname + "/uploads/" + newName);
 });
 
 const PORT = 4000;
