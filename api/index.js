@@ -16,6 +16,7 @@ const jwtSecret = "64asd54ad56as5ds4564as46a5";
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(
   cors({
     credentials: true,
@@ -89,12 +90,12 @@ app.post("/logout", (req, res) => {
 app.post("/upload-by-link", async (req, res) => {
   const { link } = req.body;
   console.log(link);
-  const newName = Date.now() + ".jpg";
+  const newName = "photo" + Date.now() + ".jpg";
   await imageDownload.image({
     url: link,
     dest: __dirname + "/uploads/" + newName,
   });
-  res.json(__dirname + "/uploads/" + newName);
+  res.json(newName);
 });
 
 const PORT = 4000;
