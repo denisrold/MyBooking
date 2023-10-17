@@ -1,7 +1,36 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function PlacesPage(){
-    
+    const [title,setTitle]= useState('');
+    const [address,setAddress] = useState('');
+    const [addedPhotos, setAddedPhotos]= useState([]);
+    const [photoLink, setPhotoLink]=('');
+    const [description,setDescription] = useState('');
+    const [perks,setPerks] = useState([]);
+    const [extraInfo, setExtraInfo] = useState('');
+    const [checkIn,setCheckIn] = useState('');
+    const [checkOut,setCheckOut] = useState('');
+    const [maxGuests,setMaxGuest]= useState(1);
+
+    function inputHeader(text){
+        return (<h2 className="text-2xl mt-4">{text}</h2>)
+    };
+    function inputDescription(text){
+    return (
+        <p className="text-gray-500 text-sm">{text}</p>
+    )
+    };
+    function preInput(header,description){
+        return (
+            <>
+            {inputHeader(header)}
+            {inputDescription(description)}
+            </>
+        )
+    }
+
+
     const {action} = useParams();
 return(
         <div>
@@ -18,14 +47,11 @@ return(
         {action === 'new' && (
         <div>
         <form>
-            <h2 className="text-2xl mt-4">Title</h2>
-            <p className="text-gray-500 text-sm">Title for you place, should be short and catchy as in advertisement</p>
+            {preInput('Title','Title for you place, should be short and catchy as in advertisement')}
             <input type='text' placeholder="My lovely apt"/>
-            <h2 className="text-2xl mt-4">Address</h2>
-            <p className="text-gray-500 text-sm">Address to this place.</p>
+            {preInput('Address','Address to this place.')}
             <input type='text' placeholder="address"/>
-            <h2 className="text-2xl mt-4">Photos</h2>
-            <p className="text-gray-500 text-sm">More = better.</p>
+            {preInput('Photos','More = better.')}
             <div className="flex gap-2">
                 <input type='text' placeholder={'Add using a link ...jpg'}/>
                 <button className="bg-gray-200 px-4  rounded-2xl">Add&nbsp;photo</button>
