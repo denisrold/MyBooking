@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import Perks from "../Perks";
 import axios from "axios";
 import PhotosUploader from "../PhotosUploader";
@@ -8,13 +8,13 @@ export default function PlacesPage(){
     const [title,setTitle]= useState('');
     const [address,setAddress] = useState('');
     const [addedPhotos, setAddedPhotos]= useState([]);
-    
     const [description,setDescription] = useState('');
     const [perks,setPerks] = useState([]);
     const [extraInfo, setExtraInfo] = useState('');
     const [checkIn,setCheckIn] = useState('');
     const [checkOut,setCheckOut] = useState('');
     const [maxGuests,setMaxGuest]= useState(1);
+    const [redirect,setRedirect] = useState('');
     
     const {action} = useParams();
     
@@ -35,6 +35,19 @@ export default function PlacesPage(){
         )
     }
     
+    async function addNewPLace(e){
+        e.preventDefault();
+    const {data} = await  axios.post('/places',{
+        address,title,addedPhotos,
+        description,perks,extraInfo,
+        checkIn,checkOut,maxGuests
+    });
+    setRedirect('/account/places')
+    };
+
+    if(redirect){
+        return <Navigate to={redirect}/>
+    }
 return(
         <div>
         {action !== 'new' && (
@@ -49,7 +62,7 @@ return(
             )}
         {action === 'new' && (
             <div>
-                <form>
+                <form onSubmit={addNewPLace}>
                     {preInput('Title','Title for you place, should be short and catchy as in advertisement')}
                     <input type='text' value={title} onChange={ev=>setTitle(ev.target.value)} placeholder="My lovely apt"/>
                     {preInput('Address','Address to this place.')}
