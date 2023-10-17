@@ -54,9 +54,9 @@ export default function PlacesPage(){
 
             }
         }).then(res=>{
-            const {data:filename} = res;
+            const {data:filenames} = res;
             setAddedPhotos(prev=>{
-                return [...prev,filename];
+                return [...prev,...filenames];
             })
         })
     };
@@ -91,8 +91,8 @@ return(
 
                     <div className="mt-2 gap-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                         {addedPhotos.length>0 && addedPhotos.map(link=>(
-                            <div key={link} >
-                                <img className="rounded-2xl" src={'http://127.0.0.1:4000/uploads/'+link}></img>
+                            <div className='h-32 flex' key={link} >
+                                <img className=" w-full object-cover rounded-2xl" src={'http://127.0.0.1:4000/uploads/'+link}></img>
                             </div>
                         )                        
                         )}
