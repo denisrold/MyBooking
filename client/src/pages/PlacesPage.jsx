@@ -14,7 +14,9 @@ export default function PlacesPage(){
     const [checkIn,setCheckIn] = useState('');
     const [checkOut,setCheckOut] = useState('');
     const [maxGuests,setMaxGuest]= useState(1);
-
+    
+    const {action} = useParams();
+    
     function inputHeader(text){
         return (<h2 className="text-2xl mt-4">{text}</h2>)
     };
@@ -40,7 +42,26 @@ export default function PlacesPage(){
         })
     };
 
-    const {action} = useParams();
+    function uploadPhoto(e){
+        const files = e.target.files;
+        const data = new FormData();
+        for(let i =0;i <files.length;i++){
+            data.append('photos',files[i]);
+        }
+        axios.post('/upload',data,{
+            headers:{
+                'Content-Type':'multipart/form-data',
+
+            }
+        }).then(res=>{
+            const {data:filename} = res;
+            setAddedPhotos(prev=>{
+                return [...prev,filename];
+            })
+        })
+    };
+
+
 return(
         <div>
         {action !== 'new' && (
@@ -67,6 +88,7 @@ return(
                             onClick={addPhotoByLink}
                             className="bg-gray-200 px-4  rounded-2xl">Add&nbsp;photo</button>
                     </div>
+
                     <div className="mt-2 gap-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                         {addedPhotos.length>0 && addedPhotos.map(link=>(
                             <div key={link} >
@@ -74,12 +96,13 @@ return(
                             </div>
                         )                        
                         )}
-                        <button className=" flex items-center gap-1 justify-center border bg-transparent rounded-2xl p-2 text-xl text-gray-600">
+                        <label className=" flex items-center cursor-pointer gap-1 justify-center border bg-transparent rounded-2xl p-2 text-xl text-gray-600">
+                        <input type='file' multiple className="hidden" onChange={uploadPhoto}></input>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
                         </svg>
                         Upload
-                        </button>
+                        </label>
                     </div>
                     {preInput('Description','Description of the place')}
                     <textarea value={description} onChange={ev=>setDescription(ev.target.value)}/>.
