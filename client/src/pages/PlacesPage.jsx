@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import AccountNav from "../AccountNav";
+import { useEffect } from "react";
 
 export default function PlacesPage(){
-
+    const [places, setPlaces] = useState([]);
+useEffect(()=>{
+    axios.get('/places').then(({data})=>{
+    setPlaces(data);
+    })
+},[]);
 return(
         <div>
             <AccountNav/>
