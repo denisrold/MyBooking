@@ -18,6 +18,7 @@ export default function PlacesFormPage(){
     const [checkOut,setCheckOut] = useState('');
     const [maxGuests,setMaxGuest]= useState(1);
     const [redirect,setRedirect] = useState(false);
+    const [price,setPrice]= useState(100);
 
     useEffect(()=>{
         if(!id){return};
@@ -32,6 +33,7 @@ export default function PlacesFormPage(){
             setCheckIn(data.checkin);
             setCheckOut(data.checkout);
             setMaxGuest(data.maxGuest);
+            setPrice(data.price);
         })
     },[id]);
     
@@ -56,7 +58,7 @@ export default function PlacesFormPage(){
         e.preventDefault();
         const placeData = {address,title,addedPhotos,
             description,perks,extraInfo,
-            checkIn,checkOut,maxGuests}
+            checkIn,checkOut,maxGuests,price}
         if(id){
             const {data} = await  axios.put('/places',{
                 id,
@@ -94,7 +96,7 @@ export default function PlacesFormPage(){
         {preInput('Extra info','House rules, etc...')}
         <textarea value={extraInfo} onChange={ev=>setExtraInfo(ev.target.value)}/> 
         {preInput('Check in & out times, max guest','Add check in and out times, remember to have some time window for cleaning the room between guests')}
-        <div className="grid gap-2 sm:grid-cols-3 ">
+        <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-4 ">
             <div>
                 <h3 className="mt-2 -mb-1">Check in time</h3>
                 <input value={checkIn} 
@@ -115,6 +117,16 @@ export default function PlacesFormPage(){
                 onChange={ev=>setMaxGuest(ev.target.value)} 
                 type="number" 
                 placeholder="4" />
+            </div>
+            <div>
+                <h3 className="mt-2 -mb-1">Price per night</h3>
+                <div className="flex items-center">    
+                <span className="font-semibold">$</span>
+                <input value={price} 
+                onChange={ev=>setPrice(ev.target.value)} 
+                type="number" 
+                placeholder="4" />
+                </div>
             </div>
         </div>
         <button className="primary my-4">save</button>

@@ -127,6 +127,7 @@ app.post("/places", async (req, res) => {
     checkIn,
     checkOut,
     maxGuests,
+    price,
   } = req.body;
 
   const { token } = req.cookies;
@@ -143,6 +144,7 @@ app.post("/places", async (req, res) => {
       checkin: checkIn,
       checkout: checkOut,
       maxGuest: maxGuests,
+      price,
     });
     res.json({ placeDoc });
   });
@@ -175,6 +177,7 @@ app.put("/places", async (req, res) => {
     checkIn,
     checkOut,
     maxGuests,
+    price,
   } = req.body;
 
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -191,6 +194,7 @@ app.put("/places", async (req, res) => {
         checkin: checkIn,
         checkout: checkOut,
         maxGuest: maxGuests,
+        price,
       });
 
       await placeDoc.save();
