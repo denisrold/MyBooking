@@ -124,9 +124,9 @@ app.post("/places", async (req, res) => {
     description,
     perks,
     extraInfo,
-    checkin,
-    checkout,
-    maxGuest,
+    checkIn,
+    checkOut,
+    maxGuests,
   } = req.body;
 
   const { token } = req.cookies;
@@ -140,9 +140,9 @@ app.post("/places", async (req, res) => {
       description,
       perks,
       extraInfo,
-      checkin,
-      checkout,
-      maxGuest,
+      checkin: checkIn,
+      checkout: checkOut,
+      maxGuest: maxGuests,
     });
     res.json({ placeDoc });
   });

@@ -23,6 +23,15 @@ export default function PlacesFormPage(){
         if(!id){return};
         axios.get('/places/'+id).then(({data})=>{
             console.log(data);
+            setAddress(data.address);
+            setTitle(data.title);
+            setAddedPhotos(data.photos);
+            setDescription(data.description);
+            setPerks(data.perks);
+            setExtraInfo(data.extraInfo);
+            setCheckIn(data.checkin);
+            setCheckOut(data.checkout);
+            setMaxGuest(data.maxGuest);
         })
     },[id]);
     
