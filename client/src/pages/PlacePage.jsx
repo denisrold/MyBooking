@@ -86,8 +86,43 @@ export default function PlacePage(){
 
                     Show more photos</button>
                 </div>
-               
-            </div>
+                <div className="my-4">
+                    <h2 className="font-semibold text-2xl">Description</h2>    
+                    {place.description}
+                </div>
+                <div className="grid grid-cols-2">
+                    <div>
+                        Check-In: {place.checkin}<br/>
+                        Check-Out: {place.checkout}<br/>
+                        Max-Guest: {place.maxGuest}<br/>
+                    </div>
+                    <div>
+                        <div className="bg-white shadow p-4 rounded-2xl">
+                            <div className="text-2xl text-center">
+                                Price:${place.price} / per night 
+                            </div>
+                            <div className="border-2 shadow-lg shadow-gray-200 rounded-2xl my-4">
+                                <div className="flex ">
+                                    <div className=" border-gray-200 py-2 px-4">
+                                        <label>Check in: </label>
+                                        <input type='date'/>
+                                    </div>
+                                    
+                                    <div className="mb-2 border-gray-200 py-2 px-4 border-l-2">
+                                        <label>Check out: </label>
+                                        <input type='date' className="w-28"/>
+                                    </div>
+                                </div>
+                                <div className="mb-2 border-gray-200 pt-2 px-4 border-t-2">
+                                        <label>Number of guest: </label>
+                                        <input type='number' className="outline-none border-2 shadow-md" />
+                                </div>
+                            </div>
+                            <button className="primary">Book this place</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
         
     )
 };
