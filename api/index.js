@@ -30,6 +30,15 @@ app.use(
 
 mongoose.connect(process.env.MONGODB_URL);
 
+function getUserDataFromToken(req) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      resolve(userData);
+    });
+  });
+}
+
 //Register
 app.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
@@ -208,11 +217,13 @@ app.get("/places", async (req, res) => {
   res.json(await Place.find());
 });
 
-app.post("/booking", (req, res) => {
+app.post("/booking", async (req, res) => {
+  const userData = await getUserDataFromToken(req);
   const { place, checkIn, checkout, mobile, name, numberOfGuests, price } =
     req.body;
   BookingModel.create({
     place,
+    user: userData.id,
     checkIn,
     checkout,
     mobile,
@@ -226,6 +237,11 @@ app.post("/booking", (req, res) => {
     .catch((err) => {
       console.log("error", err);
     });
+});
+
+app.get("/bookings", async (req, res) => {
+  const userData = await getUserDataFromToken(req);
+  res.json(await BookingModel.find({ user: userData.id }));
 });
 
 const PORT = 4000;
