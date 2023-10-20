@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const imageDownload = require("image-downloader");
 const multer = require("multer");
 const fs = require("fs");
+const BookingModel = require("./models/Booking.js");
 
 require("dotenv").config();
 
@@ -205,6 +206,20 @@ app.put("/places", async (req, res) => {
 
 app.get("/places", async (req, res) => {
   res.json(await Place.find());
+});
+
+app.post("/booking", async (req, res) => {
+  const { place, checkIn, checkout, mobile, name, numberOfGuests, price } =
+    req.body;
+  BookingModel.create({
+    place,
+    checkIn,
+    checkout,
+    mobile,
+    name,
+    numberOfGuests,
+    price,
+  });
 });
 
 const PORT = 4000;
