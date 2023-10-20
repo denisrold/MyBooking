@@ -208,7 +208,7 @@ app.get("/places", async (req, res) => {
   res.json(await Place.find());
 });
 
-app.post("/booking", async (req, res) => {
+app.post("/booking", (req, res) => {
   const { place, checkIn, checkout, mobile, name, numberOfGuests, price } =
     req.body;
   BookingModel.create({
@@ -219,6 +219,9 @@ app.post("/booking", async (req, res) => {
     name,
     numberOfGuests,
     price,
+  }).then((err, doc) => {
+    if (err) throw err;
+    res.json(doc);
   });
 });
 

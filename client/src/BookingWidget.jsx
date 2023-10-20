@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {differenceInCalendarDays} from "date-fns";
+import axios from "axios";
 
 export default function BookingWidget({place}){
     const [checkIn,setCheckIn] = useState('');
@@ -7,12 +8,21 @@ export default function BookingWidget({place}){
     const [numberOfGuests, setNumberOfGuests]= useState(1);
     const [name,setName] = useState('');
     const [mobile,setMobile] = useState('');
-
+   
     let numberOfNight = 0;
 
     if(checkIn && checkout){
         numberOfNight = differenceInCalendarDays(new Date(checkout), new Date(checkIn));
     }
+
+    async function bookThisPlace(){ 
+        let price = numberOfNight * place.price;
+        const data = {
+            checkIn,checkout,numberOfGuests,name,mobile,
+            place:place.id, price};
+        await axios.post('/bookings', data);
+    }
+
 
     return(
         <div className="bg-white shadow p-4 rounded-2xl">
@@ -44,7 +54,7 @@ export default function BookingWidget({place}){
             </div>
             )}
         </div>
-        <button className="primary" value={1}>Book this place
+        <button onClick={bookThisPlace} className="primary" value={1}>Book this place
         {numberOfNight > 0 && (
             <span className="ml-1">
                 ${numberOfNight * place.price}
