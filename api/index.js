@@ -219,10 +219,13 @@ app.post("/booking", (req, res) => {
     name,
     numberOfGuests,
     price,
-  }).then((err, doc) => {
-    if (err) throw err;
-    res.json(doc);
-  });
+  })
+    .then((doc) => {
+      res.json(doc);
+    })
+    .catch((err) => {
+      console.log("error", err);
+    });
 });
 
 const PORT = 4000;

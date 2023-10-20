@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {differenceInCalendarDays} from "date-fns";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 export default function BookingWidget({place}){
     const [checkIn,setCheckIn] = useState('');
@@ -8,6 +9,7 @@ export default function BookingWidget({place}){
     const [numberOfGuests, setNumberOfGuests]= useState(1);
     const [name,setName] = useState('');
     const [mobile,setMobile] = useState('');
+    const [redirect, setRedirect] = useState('');
    
     let numberOfNight = 0;
 
@@ -17,12 +19,16 @@ export default function BookingWidget({place}){
 
     async function bookThisPlace(){ 
         let price = numberOfNight * place.price;
-        const data = {
+        const response = await axios.post('/booking', {
             checkIn,checkout,numberOfGuests,name,mobile,
-            place:place.id, price};
-        await axios.post('/bookings', data);
+            place:place._id, price});
+        const bookingId = response.data._id;
+        setRedirect(`/account/bookings/${bookingId}`);
     }
 
+    if(redirect){
+        return <Navigate to={redirect} />
+    }
 
     return(
         <div className="bg-white shadow p-4 rounded-2xl">
