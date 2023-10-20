@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
+import BookingWidget from "../BookingWidget";
 
 export default function PlacePage(){
     const [place,setPlace] =useState(null);
@@ -18,7 +19,7 @@ export default function PlacePage(){
     if(showAllPhotos){
         return(
 
-            <div className="absolute  inset-0  min-h-screen ">
+            <div className="absolute  inset-0  min-h-screen">
                 <div className="p-8 grid gap-4  bg-black text-white">
                     <div className="">
                         <h2 className="text-xl text-center" >Photos of {place.title}</h2>
@@ -86,41 +87,25 @@ export default function PlacePage(){
 
                     Show more photos</button>
                 </div>
-                <div className="my-4">
-                    <h2 className="font-semibold text-2xl">Description</h2>    
-                    {place.description}
-                </div>
-                <div className="grid grid-cols-2">
+                
+                <div className=" my-8 gap-8 grid grid-cols-1 md:grid-cols-[2fr_1fr]">
                     <div>
+                        <div className="my-4">
+                        <h2 className="font-semibold text-2xl">Description</h2>    
+                        {place.description}
+                    </div>
                         Check-In: {place.checkin}<br/>
                         Check-Out: {place.checkout}<br/>
                         Max-Guest: {place.maxGuest}<br/>
+                    
                     </div>
                     <div>
-                        <div className="bg-white shadow p-4 rounded-2xl">
-                            <div className="text-2xl text-center">
-                                Price:${place.price} / per night 
-                            </div>
-                            <div className="border-2 shadow-lg shadow-gray-200 rounded-2xl my-4">
-                                <div className="flex ">
-                                    <div className=" border-gray-200 py-2 px-4">
-                                        <label>Check in: </label>
-                                        <input type='date'/>
-                                    </div>
-                                    
-                                    <div className="mb-2 border-gray-200 py-2 px-4 border-l-2">
-                                        <label>Check out: </label>
-                                        <input type='date' className="w-28"/>
-                                    </div>
-                                </div>
-                                <div className="mb-2 border-gray-200 pt-2 px-4 border-t-2">
-                                        <label>Number of guest: </label>
-                                        <input type='number' className="outline-none border-2 shadow-md" />
-                                </div>
-                            </div>
-                            <button className="primary">Book this place</button>
-                        </div>
+                        <BookingWidget place={place}/>
                     </div>
+                </div>
+                <div className="bg-white -mx-8 px-8 pt-8 pb-1 my-4 border-t-2">
+                    <h2 className="font-semibold text-2xl">Extrainfo: </h2>   
+                    <div className="text-sm text-gray-800  mt-1 mb-4 leading-5" >{place.extraInfo}</div>
                 </div>
                 </div>
         
