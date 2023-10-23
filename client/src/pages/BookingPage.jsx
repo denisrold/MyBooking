@@ -32,7 +32,7 @@ return (
         <div className="flex items-center gap-1 pt-1">
     <AddressLink className={'block text-gray-600'}>{booking.place.address}</AddressLink>
         </div>
-        <div className="bg-gray-200 m-4 p-6 rounded-2xl flex justify-between">
+        <div className="bg-gray-200 m-4 p-6 rounded-2xl flex items-center justify-between">
             <div>            
                 <h2 className="text-lg  mb-4 font-medium ">Your booking information:</h2>
                 <BookingDates booking={booking}/>
