@@ -20,8 +20,8 @@ export default function PlaceGalery({place}){
                             Back</button>
                     </div>
                 <div className="p-8 grid gap-4 justify-center">
-                {place?.photos?.length > 0 && place?.photos?.map(photo=>(
-                    <img style={{'height':'500px'}} className=" rounded-md" src={"http://127.0.0.1:4000/uploads/"+photo}></img>
+                {place?.photos?.length > 0 && place?.photos?.map((photo,i)=>(
+                    <img key={i} style={{'height':'500px'}} className=" rounded-md" src={"http://127.0.0.1:4000/uploads/"+photo}></img>
                 )) }
                 </div>
                 </div>
