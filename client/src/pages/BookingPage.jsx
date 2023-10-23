@@ -22,8 +22,8 @@ export default function BookingPage(){
 
     if(!booking){
         return (
-            <div className=" flex text-2xl font-bold h-screen items-center justify-center mb-96">
-                Loading
+            <div className=" flex text-2xl font-bold h-screen items-center justify-center pb-48">
+                Loading...
             </div>
     )}
 return (

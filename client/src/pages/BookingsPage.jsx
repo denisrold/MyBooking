@@ -14,6 +14,13 @@ export default function BookingsPage(){
             setBooking([...data]);
         })
     },[])
+
+    if(!bookings.length){
+        return (
+            <div className=" flex text-2xl font-bold h-screen items-center justify-center pb-48">
+                Loading...
+            </div>
+    )}
     return (
     <div>
         <AccountNav />
