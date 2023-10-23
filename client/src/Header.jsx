@@ -5,7 +5,7 @@ import { UserContext } from "./UserContext";
 export default function Header(){
   const {user} = useContext(UserContext);
    return( 
-   <header className=" flex justify-between items-center">
+   <header className=" flex justify-between items-center lg:px-16">
     <Link to='/' className="flex items-center gap-1">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +23,7 @@ export default function Header(){
       </svg>
       <span className="font-bold text-xl">aircnc</span>
     </Link>
-    <div className="flex border border-gray-300 gap-2 rounded-full py-2 px-4 shadow-md shadow-gray-200">
+    <div className="flex border lg:ml-12 border-gray-300 gap-2 rounded-full py-2 px-4 shadow-md shadow-gray-200">
       <div>Anywhere</div>
       <div className="border-l border-gray-300"></div>
       <div>Any week</div>

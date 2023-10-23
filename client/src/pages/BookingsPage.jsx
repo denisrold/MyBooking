@@ -24,7 +24,7 @@ export default function BookingsPage(){
     return (
     <div>
         <AccountNav />
-        <div>
+        <div className="lg:w-2/3 lg:mx-auto">
         {bookings?.length > 0 && (
             bookings.map((booking,i) => (
                 <Link to={`/account/bookings/${booking._id}`} key={i} className="flex gap-4 bg-gray-200 rounded-2xl overflow-hidden">
