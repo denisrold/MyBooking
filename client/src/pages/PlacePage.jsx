@@ -20,8 +20,8 @@ export default function PlacePage(){
     
     return(
             <div className="mt-4 py-8 -mx-8 px-8 bg-gray-100">
-                <h1 className="text-2xl">{place.title}</h1>
-                <div className="flex gap-1 items-center mb-2">
+                <h1 className="text-2xl lg:text-center">{place.title}</h1>
+                <div className="flex gap-1 items-center mb-2 lg:justify-center">
                 <AddressLink>{place.address}</AddressLink>
                 </div>
                 <PlaceGalery place={place} />
