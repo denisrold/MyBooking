@@ -7,20 +7,24 @@ import BookingDates from "../BookingDates";
 
 export default function BookingsPage(){
     const [bookings,setBooking] = useState([]);
-
+  
 
     useEffect(()=>{
         axios.get('/bookings').then(({data})=>{
             setBooking([...data]);
+     
         })
+
     },[])
 
     if(!bookings.length){
         return (
-            <div className=" flex text-2xl font-bold h-screen items-center justify-center pb-48">
-                Loading...
-            </div>
+            
+                <div className=" flex text-2xl font-bold h-screen items-center justify-center pb-48">
+                         No Bookings were recorder.
+                </div>
     )}
+
     return (
     <div>
         <AccountNav />

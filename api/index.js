@@ -13,11 +13,11 @@ const BookingModel = require("./models/Booking.js");
 
 require("dotenv").config();
 
-//web ok in 127.0.0.1 no localhost
+//web ok in 127.0.0.1 // no localhost
 const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
 //Pasar a .env
-const jwtSecret = "64asd54ad56as5ds4564as46a5";
+const jwtSecret = process.env.JWT_SECRET;
 
 app.use(express.json());
 app.use(cookieParser());
