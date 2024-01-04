@@ -56,20 +56,23 @@ export default function PlacesFormPage(){
     
     async function savePLace(e){
         e.preventDefault();
-        const placeData = {address,title,addedPhotos,
-            description,perks,extraInfo,
-            checkIn,checkOut,maxGuests,price}
-        if(id){
-            const {data} = await  axios.put('/places',{
-                id,
-                ...placeData,});
-            setRedirect(true);
-        }
-        else{
-            const {data} = await  axios.post('/places',placeData);
-            setRedirect(true);
-        }
+        //Demo commented
+        // const placeData = {address,title,addedPhotos,
+        //     description,perks,extraInfo,
+        //     checkIn,checkOut,maxGuests,price}
+        // if(id){
+        //     const {data} = await  axios.put('/places',{
+        //         id,
+        //         ...placeData,});
+        //     setRedirect(true);
+        // }
+        // else{
+        //     const {data} = await  axios.post('/places',placeData);
+        //     setRedirect(true);
+        // }
 
+        //End of demo
+        return (<Navigate to="/"/>)
     };
 
     
@@ -85,8 +88,9 @@ export default function PlacesFormPage(){
         <input type='text' value={title} onChange={ev=>setTitle(ev.target.value)} placeholder="My lovely apt"/>
         {preInput('Address','Address to this place.')}
         <input type='text' value={address} onChange={ev=>setAddress(ev.target.value)} placeholder="address"/>
-        {preInput('Photos','More = better.')}
-        <PhotosUploader addedPhotos={addedPhotos} onChange={setAddedPhotos}/>
+        {preInput('Photos','More = better. DISABLED IN DEMO VERSION GO TO GITHUB DOCUMENTATION.')}
+       {/* UNCOMMENT FOR REAL VERSION. */}
+        {/* <PhotosUploader addedPhotos={addedPhotos} onChange={setAddedPhotos}/> */}
         {preInput('Description','Description of the place')}
         <textarea value={description} onChange={ev=>setDescription(ev.target.value)}/>.
         {preInput('Perks','Select all the perks of your place')}
@@ -129,8 +133,9 @@ export default function PlacesFormPage(){
                 </div>
             </div>
         </div>
-        <button className="primary my-4">save</button>
+        <button className="primary my-4 cursor-pointer">save - Just a demo.</button>
     </form>
+
 </div>
     )
     
