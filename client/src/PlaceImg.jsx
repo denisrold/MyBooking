@@ -7,6 +7,6 @@ export default function PlaceImg({place, index =0, className = null}){
         className='object-cover'
     }
     return(
-        <img className={className} src={'http://127.0.0.1:4000/uploads/'+place.photos[index]}/>
+        <img className={className} src={import.meta.env.VITE_AXIOS_DEFAULT_BACKEND_PHOTO_LINK+place.photos[index]}/>
     )
 };

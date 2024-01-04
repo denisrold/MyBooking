@@ -13,8 +13,9 @@ import PlacesFormPage from './pages/PlacesFormPage';
 import PlacePage from './pages/PlacePage';
 import BookingPage from './pages/BookingPage';
 import BookingsPage from './pages/BookingsPage';
+
 //axios config
-axios.defaults.baseURL='http://127.0.0.1:4000';
+axios.defaults.baseURL = import.meta.env.VITE_AXIOS_DEFAULT_BASE;
 axios.defaults.withCredentials=true;
 
 function App() {

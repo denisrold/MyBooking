@@ -55,7 +55,7 @@ export default function PhotosUploader({addedPhotos,onChange}){
     <div className="mt-2 gap-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {addedPhotos.length>0 && addedPhotos.map(link=>(
         <div className='h-32 flex relative' key={link} >
-            <img className=" w-full object-cover rounded-2xl" src={'http://127.0.0.1:4000/uploads/'+link}></img>
+            <img className=" w-full object-cover rounded-2xl" src={import.meta.env.VITE_AXIOS_DEFAULT_BACKEND_PHOTO_LINK+link}></img>
             <button 
             className="absolute bottom-1 right-2 bg-black opacity-70 p-1 text-white rounded-xl cursor-pointer hover:scale-105 hover:opacity-80"
             onClick={e=>removePhoto(e,link)}>

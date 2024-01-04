@@ -20,7 +20,7 @@ export default function PlaceGalery({place}){
                     </div>
                 <div className="p-8 grid gap-4 justify-center">
                 {place?.photos?.length > 0 && place?.photos?.map((photo,i)=>(
-                    <img key={i} style={{'height':'500px'}} className=" rounded-md" src={"http://127.0.0.1:4000/uploads/"+photo}></img>
+                    <img key={i} style={{'height':'500px'}} className=" rounded-md" src={import.meta.env.VITE_AXIOS_DEFAULT_BACKEND_PHOTO_LINK+photo}></img>
                 )) }
                 </div>
                 </div>

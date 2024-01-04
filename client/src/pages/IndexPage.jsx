@@ -15,7 +15,7 @@ export default function IndexPage() {
       <Link key={i} to={`/place/${place._id}`}>
         <div className="bg-gray-500 rounded-2xl flex mb-2">
           {place.photos?.[0] && (
-          <img src={"http://127.0.0.1:4000/uploads/"+ place.photos[0]}
+          <img src={import.meta.env.VITE_AXIOS_DEFAULT_BACKEND_PHOTO_LINK+ place.photos[0]}
           className=" rounded-2xl aspect-square object-cover"/>
           )}
         </div>
