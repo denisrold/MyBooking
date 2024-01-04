@@ -20,6 +20,7 @@ const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = process.env.JWT_SECRET;
 const corsOrigin = process.env.CORS_ORIGIN;
 const cookieDomain = process.env.COOKIE_DOMAIN;
+const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -252,7 +253,6 @@ app.get("/bookings", async (req, res) => {
   res.json(await BookingModel.find({ user: userData.id }).populate("place"));
 });
 
-const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`Running in PORT:${PORT}`);
 });
