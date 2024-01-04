@@ -18,14 +18,15 @@ const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
 //Pasar a .env
 const jwtSecret = process.env.JWT_SECRET;
-
+const corsOrigin = process.env.CORS_ORIGIN;
+const cookieDomain = process.env.COOKIE_DOMAIN;
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(
   cors({
     credentials: true,
-    origin: "http://127.0.0.1:5173",
+    origin: corsOrigin,
   })
 );
 
@@ -72,7 +73,7 @@ app.post("/login", async (req, res) => {
           if (err) throw err;
           res
             .cookie("token", token, {
-              domain: "127.0.0.1",
+              domain: cookieDomain,
               path: "*",
             })
             .json(userDoc);
