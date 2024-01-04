@@ -24,6 +24,7 @@ export default function BookingPage(){
         return (
             <div className=" flex text-2xl font-bold h-screen items-center justify-center pb-48">
                 Loading...
+
             </div>
     )}
 return (

@@ -13,6 +13,7 @@ const BookingModel = require("./models/Booking.js");
 
 require("dotenv").config();
 
+//web ok in 127.0.0.1 no localhost
 const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
 //Pasar a .env
@@ -31,8 +32,10 @@ app.use(
 mongoose.connect(process.env.MONGODB_URL);
 
 function getUserDataFromToken(req) {
+  console.log("Cookies recibidas 1:", req.cookies);
   return new Promise((resolve, reject) => {
-    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
+    const { token } = req.cookies;
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
       resolve(userData);
     });
@@ -41,6 +44,7 @@ function getUserDataFromToken(req) {
 
 //Register
 app.post("/register", async (req, res) => {
+  console.log("Cookies recibidas 2:", req.cookies);
   const { name, email, password } = req.body;
   try {
     const userDoc = await User.create({
@@ -57,6 +61,7 @@ app.post("/register", async (req, res) => {
 
 //Login
 app.post("/login", async (req, res) => {
+  console.log("Cookies recibidas 3:", req.cookies);
   const { email, password } = req.body;
   const userDoc = await User.findOne({ email });
   if (userDoc) {
@@ -69,7 +74,10 @@ app.post("/login", async (req, res) => {
         (err, token) => {
           if (err) throw err;
           res
-            .cookie("token", token, { domain: "127.0.0.1", path: "/" })
+            .cookie("token", token, {
+              domain: "127.0.0.1",
+              path: "*",
+            })
             .json(userDoc);
         }
       );
@@ -83,8 +91,10 @@ app.post("/login", async (req, res) => {
 
 //Profile
 
-app.get("/profile", (req, res) => {
+app.get("/profile", async (req, res) => {
+  console.log("Cookies recibidas 4:", req.cookies);
   const { token } = req.cookies;
+  console.log(req.cookies);
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
@@ -97,12 +107,14 @@ app.get("/profile", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
+  console.log("Cookies recibidas: 5", req.cookies);
   res.cookie("token", "").json(true);
 });
 
 app.post("/upload-by-link", async (req, res) => {
+  console.log("Cookies recibidas 6:", req.cookies);
   const { link } = req.body;
-  console.log(link);
+
   const newName = "photo" + Date.now() + ".jpg";
   await imageDownload.image({
     url: link,
@@ -127,6 +139,7 @@ app.post("/upload", photosMiddleware.array("photos", 100), (req, res) => {
 });
 
 app.post("/places", async (req, res) => {
+  console.log("Cookies recibidas 7:", req.cookies);
   const {
     title,
     address,
@@ -161,7 +174,9 @@ app.post("/places", async (req, res) => {
 });
 
 app.get("/user-places", async (req, res) => {
+  console.log("Cookies recibidas 8:", req.cookies);
   const { token } = req.cookies;
+
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
     const { id } = userData;
@@ -170,11 +185,13 @@ app.get("/user-places", async (req, res) => {
 });
 
 app.get("/places/:id", async (req, res) => {
+  console.log("Cookies recibidas 9:", req.cookies);
   const { id } = req.params;
   res.json(await Place.findById(id));
 });
 
 app.put("/places", async (req, res) => {
+  console.log("Cookies recibidas 10:", req.cookies);
   const { token } = req.cookies;
   const {
     id,
@@ -214,10 +231,12 @@ app.put("/places", async (req, res) => {
 });
 
 app.get("/places", async (req, res) => {
+  console.log("Cookies recibidas:", req.cookies);
   res.json(await Place.find());
 });
 
 app.post("/booking", async (req, res) => {
+  console.log("Cookies recibidas:", req.cookies);
   const userData = await getUserDataFromToken(req);
   const { place, checkIn, checkout, mobile, name, numberOfGuests, price } =
     req.body;
@@ -240,6 +259,7 @@ app.post("/booking", async (req, res) => {
 });
 
 app.get("/bookings", async (req, res) => {
+  console.log("Cookies recibidas:", req.cookies);
   const userData = await getUserDataFromToken(req);
   res.json(await BookingModel.find({ user: userData.id }).populate("place"));
 });
