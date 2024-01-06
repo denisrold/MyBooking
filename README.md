@@ -3,7 +3,7 @@
 <h4>¡Bienvenido a nuestra FullStack Web App de Reservas! (version Demo)</h4> 
 <p>Estamos emocionados de presentarte una experiencia única y completa diseñada para simplificar el proceso de reservas con una interfaz simple, minimalista y agradable.</p>
 
-<img src='' style="width:1000px"></img>
+<img src='https://res.cloudinary.com/didr1suca/image/upload/v1704574261/foto_1_gioxc3.png' style="width:600px"></img>
 
 </br>
 Detalles técnicos de la App: 
