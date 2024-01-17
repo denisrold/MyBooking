@@ -35,17 +35,17 @@ export default function PlaceGalery({place}){
                 <div>
                     {place.photos?.[0] && (
                         <div >
-                            <img className='aspect-square object-cover' src={"http://127.0.0.1:4000/uploads/"+place.photos[0]}/>
+                            <img className='aspect-square object-cover' src={import.meta.env.VITE_AXIOS_DEFAULT_BACKEND_PHOTO_LINK+place.photos[0]}/>
                         </div>
                     )}
                 </div>
                 <div className="grid">
                     {place.photos?.[1] && (
-                        <img className='aspect-square object-cover' src={"http://127.0.0.1:4000/uploads/"+place.photos[1]}/>
+                        <img className='aspect-square object-cover' src={import.meta.env.VITE_AXIOS_DEFAULT_BACKEND_PHOTO_LINK+place.photos[1]}/>
                 )}
                 <div className="overflow-hidden">
                     {place.photos?.[2] && (
-                        <img className='aspect-square object-cover relative top-2' src={"http://127.0.0.1:4000/uploads/"+place.photos[2]}/>
+                        <img className='aspect-square object-cover relative top-2' src={import.meta.env.VITE_AXIOS_DEFAULT_BACKEND_PHOTO_LINK+place.photos[2]}/>
                     )}
                     </div>  
                 </div>
