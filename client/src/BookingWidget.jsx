@@ -41,10 +41,10 @@ export default function BookingWidget({place}){
     }
 
     function dateCalendar(){
-    const dateActual = new Date()
+    let dateActual = new Date()
     const añoActual = dateActual.getFullYear();
     const mesActual = dateActual.getMonth()+1;
-    const diaActual = dateActual.getDay();
+    const diaActual = dateActual.getDate();
     const  fechaFormateada = añoActual + '-' + (mesActual < 10 ? '0' : '') + mesActual + '-' + (diaActual < 10 ? '0' : '') + diaActual;
     return fechaFormateada;
     }
@@ -55,15 +55,15 @@ export default function BookingWidget({place}){
             Price:${place.price} / per night 
         </div>
         <div className="border-2 shadow-lg shadow-gray-200 rounded-2xl my-4">
-            <div className="flex ">
-                <div className=" border-gray-200 py-2 px-4">
+            <div className="flex">
+                <div className=" border-gray-200 py-2 px-2 pr-1 md:px-4 ">
                     <label>Check in: </label>
                     <input type='date' value={checkIn} min={dateCalendar()}  onChange={(e)=>{setCheckIn(e.target.value)}}/>
                 </div>
                 
-                <div className="mb-2 border-gray-200 py-2 px-4 border-l-2">
+                <div className="mb-2 border-gray-200 py-2 px-2 pl-1 border-l-2 md:px-4">
                     <label>Check out: </label>
-                    <input type='date' value={checkout} min={checkIn} onChange={(e)=>{setCheckOut(e.target.value)}}/>
+                    <input className="" type='date' value={checkout} min={checkIn} onChange={(e)=>{setCheckOut(e.target.value)}}/>
                 </div>
             </div>
             <div className="mb-2 border-gray-200 pt-2 px-4 border-t-2">
