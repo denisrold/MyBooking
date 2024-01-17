@@ -76,6 +76,9 @@ app.post("/api/login", async (req, res) => {
             .cookie("token", token, {
               domain: cookieDomain,
               path: "*",
+              sameSite: "None", // Indica que la cookie no tiene restricciones de sitio
+              secure: true, // Indica que la cookie solo se enviará sobre conexiones seguras (HTTPS),
+              // httpOnly: true,
             })
             .json(userDoc);
         }
