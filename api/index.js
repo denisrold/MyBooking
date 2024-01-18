@@ -75,7 +75,7 @@ app.post("/api/login", async (req, res) => {
           res
             .cookie("token", token, {
               // domain: cookieDomain,
-              domain: ".vercel.app",
+              domain: cookieDomain,
               path: "/",
               sameSite: "None", // Indica que la cookie no tiene restricciones de sitio
               secure: true, // Indica que la cookie solo se enviará sobre conexiones seguras (HTTPS),
@@ -232,7 +232,8 @@ app.get("/api/places", async (req, res) => {
 });
 
 app.post("/api/booking", async (req, res) => {
-  const userData = await getUserDataFromToken(req);
+  //cookies desactivated
+  // const userData = await getUserDataFromToken(req);
   const { place, checkIn, checkout, mobile, name, numberOfGuests, price } =
     req.body;
   BookingModel.create({
@@ -254,7 +255,8 @@ app.post("/api/booking", async (req, res) => {
 });
 
 app.get("/api/bookings", async (req, res) => {
-  const userData = await getUserDataFromToken(req);
+  //cookies desactivated
+  // const userData = await getUserDataFromToken(req);
   res.json(await BookingModel.find({ user: userData.id }).populate("place"));
 });
 
