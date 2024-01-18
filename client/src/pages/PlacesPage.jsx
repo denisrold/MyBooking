@@ -8,9 +8,9 @@ export default function PlacesPage(){
     const [places, setPlaces] = useState([]);
 useEffect(()=>{
     //no cookies - comment 
-    // axios.get('/user-places').then(({data})=>{
-    // setPlaces(data);
-    // })
+    axios.get('/user-places').then(({data})=>{
+    setPlaces(data);
+    })
 },[]);
 return(
         <div>
