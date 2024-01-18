@@ -11,9 +11,9 @@ export default function BookingsPage(){
 
     useEffect(()=>{
         // comment because no coookies. 
-        // axios.get('/bookings').then(({data})=>{
-        //     setBooking([...data]);     
-        // })
+        axios.get('/bookings').then(({data})=>{
+            setBooking([...data]);     
+        })
 
     },[])
 
