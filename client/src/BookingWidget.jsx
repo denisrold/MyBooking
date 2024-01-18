@@ -4,6 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
+
+
 export default function BookingWidget({place}){
     const [checkIn,setCheckIn] = useState('');
     const [checkout,setCheckOut] = useState('');
@@ -28,6 +30,10 @@ export default function BookingWidget({place}){
     }
 
     async function bookThisPlace(){ 
+        if(!user){
+            alert('You need to be logged in for booking.')
+            return navigate('/login')
+        }
         let price = numberOfNight * place.price;
         //no cookies - comments
         const response = await axios.post('/booking', {
