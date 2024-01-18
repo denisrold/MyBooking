@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useEffect,useContext, useState } from "react";
+import { useNavigate,useParams } from "react-router-dom"
+import { UserContext } from "../UserContext";
 import BookingWidget from "../BookingWidget";
 import PlaceGalery from "../PlaceGalery";
 import AddressLink from "../AddressLink";
 
 export default function PlacePage(){
     const [place,setPlace] =useState(null);
+    const {user} = useContext(UserContext);
 
     const { id } = useParams();
     useEffect(()=>{
