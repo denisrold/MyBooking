@@ -74,7 +74,6 @@ app.post("/api/login", async (req, res) => {
           if (err) throw err;
           res
             .cookie("token", token, {
-              // domain: cookieDomain,
               domain: cookieDomain,
               path: "/",
               sameSite: "None", // Indica que la cookie no tiene restricciones de sitio
@@ -233,7 +232,7 @@ app.get("/api/places", async (req, res) => {
 
 app.post("/api/booking", async (req, res) => {
   //cookies desactivated
-  // const userData = await getUserDataFromToken(req);
+  const userData = await getUserDataFromToken(req);
   const { place, checkIn, checkout, mobile, name, numberOfGuests, price } =
     req.body;
   BookingModel.create({
@@ -256,7 +255,7 @@ app.post("/api/booking", async (req, res) => {
 
 app.get("/api/bookings", async (req, res) => {
   //cookies desactivated
-  // const userData = await getUserDataFromToken(req);
+  const userData = await getUserDataFromToken(req);
   res.json(await BookingModel.find({ user: userData.id }).populate("place"));
 });
 
