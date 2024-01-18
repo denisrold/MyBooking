@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PhotosUploader from "../PhotosUploader";
 import Perks from "../Perks";
 import axios from "axios";
-import { Navigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import AccountNav from "../AccountNav";
 
 
@@ -19,6 +19,8 @@ export default function PlacesFormPage(){
     const [maxGuests,setMaxGuest]= useState(1);
     const [redirect,setRedirect] = useState(false);
     const [price,setPrice]= useState(100);
+
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(!id){return};
@@ -53,7 +55,10 @@ export default function PlacesFormPage(){
             </>
         )
     }
-    
+    function goBackDemo(e){
+        return (navigate('/account'));
+    }
+
     async function savePLace(e){
         e.preventDefault();
         //Demo commented
@@ -72,12 +77,12 @@ export default function PlacesFormPage(){
         // }
 
         //End of demo
-        return (<Navigate to="/"/>)
+        return (navigate("/"))
     };
 
     
     if(redirect){
-        return <Navigate to={'/account/places'}/>
+        return (navigate("/account/places"))
     }
 
     return(
@@ -133,7 +138,7 @@ export default function PlacesFormPage(){
                 </div>
             </div>
         </div>
-        <button className="primary my-4 cursor-pointer">save - Just a demo.</button>
+        <button onClick={()=>{goBackDemo()}} className="primary my-4 cursor-pointer">save - Just a demo.</button>
     </form>
 
 </div>
