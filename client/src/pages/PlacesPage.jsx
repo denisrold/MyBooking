@@ -7,9 +7,10 @@ import PlaceImg from "../PlaceImg";
 export default function PlacesPage(){
     const [places, setPlaces] = useState([]);
 useEffect(()=>{
-    axios.get('/user-places').then(({data})=>{
-    setPlaces(data);
-    })
+    //no cookies - comment 
+    // axios.get('/user-places').then(({data})=>{
+    // setPlaces(data);
+    // })
 },[]);
 return(
         <div>

@@ -29,11 +29,12 @@ export default function BookingWidget({place}){
 
     async function bookThisPlace(){ 
         let price = numberOfNight * place.price;
-        const response = await axios.post('/booking', {
-            checkIn,checkout,numberOfGuests,name,mobile,
-            place:place._id, price});
-        const bookingId = response.data._id;
-        setRedirect(`/account/bookings/${bookingId}`);
+        //no cookies - comments
+        // const response = await axios.post('/booking', {
+        //     checkIn,checkout,numberOfGuests,name,mobile,
+        //     place:place._id, price});
+        // const bookingId = response.data._id;
+        // setRedirect(`/account/bookings/${bookingId}`);
     }
 
     if(redirect){
@@ -79,7 +80,7 @@ export default function BookingWidget({place}){
             </div>
             )}
         </div>
-        <button onClick={bookThisPlace} className="primary" value={1}>Book this place
+        <button onClick={bookThisPlace} className="primary"  value={1}>Book this place
         {numberOfNight > 0 && (
             <span className="ml-1">
                 ${numberOfNight * place.price}
