@@ -231,7 +231,6 @@ app.get("/api/places", async (req, res) => {
 });
 
 app.post("/api/booking", async (req, res) => {
-  //cookies desactivated
   const userData = await getUserDataFromToken(req);
   const { place, checkIn, checkout, mobile, name, numberOfGuests, price } =
     req.body;
@@ -254,7 +253,6 @@ app.post("/api/booking", async (req, res) => {
 });
 
 app.get("/api/bookings", async (req, res) => {
-  //cookies desactivated
   const userData = await getUserDataFromToken(req);
   res.json(await BookingModel.find({ user: userData.id }).populate("place"));
 });
