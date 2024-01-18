@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 export default function RegisterPage(){
@@ -7,6 +7,7 @@ export default function RegisterPage(){
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [registerOk,setRegisterOk] = useState(false);
+    const navigate = useNavigate();
     async function registerUser(e){
         e.preventDefault();
         try{
@@ -15,8 +16,8 @@ export default function RegisterPage(){
                 email,
                 password
             })
-            setRegisterOk(true);
             alert('Registration successful. Now you can log in')
+            setRegisterOk(true);
           
         }
         catch(e){
@@ -25,7 +26,7 @@ export default function RegisterPage(){
        
     }
 
-    if(registerOk) return <Navigate to='/login'/>
+    if(registerOk) return navigate('/login')
 
     return (
         <div className="mt-4 grow flex items-center justify-around">

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import {differenceInCalendarDays} from "date-fns";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
 export default function BookingWidget({place}){
@@ -12,7 +12,7 @@ export default function BookingWidget({place}){
     const [mobile,setMobile] = useState('');
     const [redirect, setRedirect] = useState('');
     const {user} = useContext(UserContext);
-   
+   const navigate = useNavigate()
     useEffect(()=>{
         if(user){
             setName(user.name);
@@ -38,7 +38,7 @@ export default function BookingWidget({place}){
     }
 
     if(redirect){
-        return <Navigate to={redirect} />
+        return navigate(redirect);
     }
 
     function dateCalendar(){
