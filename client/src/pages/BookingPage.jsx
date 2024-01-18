@@ -34,11 +34,11 @@ return (
     <AddressLink className={'block text-gray-600'}>{booking.place.address}</AddressLink>
         </div>
         <div className="bg-gray-200 m-4 p-6 lg:w-2/3 lg:mx-auto rounded-2xl flex items-center justify-between">
-            <div>            
+            <div className="">            
                 <h2 className="text-lg  mb-4 font-medium ">Your booking information:</h2>
                 <BookingDates booking={booking}/>
             </div>
-            <div className="bg-primary p-6 rounded-xl text-white">
+            <div className="hidden md:block bg-primary p-6 rounded-xl text-white">
                 <div>
                     Total Price: 
                 </div>
@@ -48,5 +48,13 @@ return (
             </div>
         </div>
         <PlaceGalery place={booking.place}/>
+        <div className=" mt-4 flex justify-evenly md:hidden bg-primary p-6 rounded-xl text-white">
+                <div className="my-auto">
+                    Total Price: 
+                </div>
+                <div className="text-2xl">
+                    ${booking.price}
+                </div>
+        </div>
     </div>)
 };
