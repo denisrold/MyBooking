@@ -6,6 +6,9 @@ export default {
       colors: {
         primary: "#F5385D",
       },
+      width: {
+        photowidth: "1050px",
+      },
     },
   },
   plugins: [],

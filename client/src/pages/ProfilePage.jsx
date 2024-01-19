@@ -31,7 +31,6 @@ export default function ProfilePage(){
     return (
        <div>
         <AccountNav />
-       
         {subpage === 'profile' &&(
             <div className="text-center max-w-lg mx-auto">
                 Welcome:{user.name.split(' ')[0].charAt(0).toUpperCase()+ user.name.split(' ')[0].slice(1)}<br/>({user.email})
