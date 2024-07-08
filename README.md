@@ -17,5 +17,5 @@ Detalles técnicos de la App:
 
 <i>La versión full, cuenta también con la capacidad de agregar alojamientos.</i>
 
-*Ningun developer fue herido en el desarrollo de esta Web App.
+
 </div>
